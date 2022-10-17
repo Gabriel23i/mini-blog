@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 
 import { useFetchDocument } from '../../hooks/useFetchDocument';
+import ScrollToTopOnMount from '../../utils/ScrollToTopOnMount';
 
 import styles from './Post.module.css';
 
@@ -10,6 +11,7 @@ const Post = () => {
 
     return (
         <div className={styles.post_container}>
+            <ScrollToTopOnMount />
             {loading && <p>Carregando post...</p>}
             {post && (
                 <>

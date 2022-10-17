@@ -5,6 +5,7 @@ import { useFetchDocuments } from '../../hooks/useFetchDocuments';
 import PostDetail from '../../components/PostDetail/PostDetail';
 
 import styles from './Home.module.css';
+import ScrollToTopOnMount from '../../utils/ScrollToTopOnMount';
 
 const Home = () => {
     const [query, setQuery] = useState('');
@@ -23,7 +24,8 @@ const Home = () => {
 
     return (
         <div className={styles.home}>
-        <h1>Veja os nossos posts mais recentes</h1>
+            <ScrollToTopOnMount />
+            <h1>Veja os nossos posts mais recentes</h1>
             <form onSubmit={handleSubmit} className={styles.search_form}>
                 <input
                 type='text'

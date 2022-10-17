@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuthentication } from '../../hooks/useAuthentication';
+import ScrollToTopOnMount from '../../utils/ScrollToTopOnMount';
 
 import styles from './Register.module.css';
 
@@ -31,7 +32,6 @@ const Register = () => {
 
     const res = await createUser(user);
 
-    console.log(res);
   };
 
   useEffect(()=>{
@@ -40,65 +40,66 @@ const Register = () => {
     };
   },[authError]);
   
-  return (
-    <div className={styles.register}>
-      <h1>Cadastre-se para postar</h1>
-      <p>Crie seu usuário e compartilhe suas histórias</p>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <span>Nome:</span>
-          <input
-            type='text'
-            name='displayname'
-            placeholder='Nome do usuário'
-            value={displayName}
-            onChange={(e)=> setDisplayName(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          <span>E-mail:</span>
-          <input
-            type='email'
-            name='email'
-            placeholder='E-mail do usuário'
-            value={email}
-            onChange={(e)=> setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          <span>Senha:</span>
-          <input
-            type='password'
-            name='password'
-            placeholder='Insira sua senha'
-            value={password}
-            onChange={(e)=>setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          <span>Confirmação de senha:</span>
-          <input
-            type='password'
-            name='confirmPassword'
-            placeholder='Confirme a sua senha'
-            value={confirmPassword}
-            onChange={(e)=> setConfirmPassword(e.target.value)}
-            required
-          />
-        </label>
-        {!loading && (<button className='btn'>Cadastrar</button>)}
-        {loading && (
-          <button className='btn' disabled>
-            Aguarde...
-          </button>
-        )}
-        {error && (<p className='error'>{error}</p>)}
-      </form>
-    </div>
-  );
+    return (
+        <div className={styles.register}>
+            <ScrollToTopOnMount />
+            <h1>Cadastre-se para postar</h1>
+            <p>Crie seu usuário e compartilhe suas histórias</p>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    <span>Nome:</span>
+                    <input
+                        type='text'
+                        name='displayname'
+                        placeholder='Nome do usuário'
+                        value={displayName}
+                        onChange={(e)=> setDisplayName(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    <span>E-mail:</span>
+                    <input
+                        type='email'
+                        name='email'
+                        placeholder='E-mail do usuário'
+                        value={email}
+                        onChange={(e)=> setEmail(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    <span>Senha:</span>
+                    <input
+                        type='password'
+                        name='password'
+                        placeholder='Insira sua senha'
+                        value={password}
+                        onChange={(e)=>setPassword(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    <span>Confirmação de senha:</span>
+                    <input
+                        type='password'
+                        name='confirmPassword'
+                        placeholder='Confirme a sua senha'
+                        value={confirmPassword}
+                        onChange={(e)=> setConfirmPassword(e.target.value)}
+                        required
+                    />
+                </label>
+                {!loading && (<button className='btn'>Cadastrar</button>)}
+                {loading && (
+                <button className='btn' disabled>
+                    Aguarde...
+                </button>
+                )}
+                {error && (<p className='error'>{error}</p>)}
+            </form>
+        </div>
+    );
 };
 
 export default Register;

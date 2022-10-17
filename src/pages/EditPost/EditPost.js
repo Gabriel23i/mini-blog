@@ -7,6 +7,7 @@ import { useUpdateDocument } from '../../hooks/useUpdateDocument';
 
 
 import styles from './EditPost.module.css';
+import ScrollToTopOnMount from '../../utils/ScrollToTopOnMount';
 
 const EditPost = () => {
     
@@ -69,6 +70,7 @@ const EditPost = () => {
 
     return (
         <div className={styles.edit_post}>
+            <ScrollToTopOnMount />
             {post && (
                 <>
                     <h2>Editando o post: {post.title}</h2>

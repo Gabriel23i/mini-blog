@@ -5,6 +5,7 @@ import { useFetchDocuments } from '../../hooks/useFetchDocuments';
 import { useDeleteDocument } from '../../hooks/useDeleteDocument';
 
 import styles from './Dashboard.module.css';
+import ScrollToTopOnMount from '../../utils/ScrollToTopOnMount';
 
 const Dashboard = () => {
     const { user } = useAuthValue();
@@ -20,6 +21,7 @@ const Dashboard = () => {
 
     return (
         <div className={styles.dashboard}>
+            <ScrollToTopOnMount />
             <h2>Dashboard</h2>
             <p>Gerencie os seus posts</p>
             {posts && posts.length === 0 ? (

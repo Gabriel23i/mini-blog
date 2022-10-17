@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthValue } from '../../context/AuthContext';
 import { useInsertDocument } from '../../hooks/useInsertDocument';
 
+import ScrollToTopOnMount from '../../utils/ScrollToTopOnMount';
 import styles from './CreatePost.module.css';
 
 const CreatePost = () => {
@@ -52,6 +53,7 @@ const CreatePost = () => {
 
     return (
         <div className={styles.create_post}>
+            <ScrollToTopOnMount />
             <h2>Criar post</h2>
             <p>Escreva sobre o que quiser e compartilhe o seu conhecimento!</p>
             <form onSubmit={handleSubmit}>
