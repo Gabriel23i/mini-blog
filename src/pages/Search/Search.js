@@ -5,7 +5,9 @@ import { useQuery } from '../../hooks/useQuery';
 
 import PostDetail from '../../components/PostDetail/PostDetail';
 
-import styles from './Search.module.css';
+import { Box, Button, Stack, Typography } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Container, NoPosts } from './styles';
 
 const Search = () => {
     const query = useQuery();
@@ -14,22 +16,34 @@ const Search = () => {
     const { documents: posts } = useFetchDocuments('posts', search);
 
     return (
-        <div className={styles.search_container}>
-            <h2>Search</h2>
-            <div>
+        <Container>
+            <Typography variant='h4'>
+                Search
+            </Typography>
+            <Box>
                 {posts && posts.length === 0 && (
-                    <div className={styles.noposts}>
-                        <p>Não foram encontrados posts a partir da sua busca...</p>
-                        <Link to='/' className='btn btn-dark'>
-                            Voltar
+                    <NoPosts>
+                        <Typography paragraph>
+                            Não foram encontrados posts a partir da sua busca...
+                        </Typography>
+                        <Link to='/'>
+                            <Stack direction="row" spacing={2}>
+                                <Button
+                                    startIcon={<ArrowBackIcon />}
+                                    size='medium'
+                                    color='primary'
+                                >
+                                    Voltar
+                                </Button>
+                            </Stack>
                         </Link>
-                    </div>
+                    </NoPosts>
                 )}
                 {posts && posts.map((post)=> (
                     <PostDetail key={post.id} post={post} />
                 ))}
-            </div>
-        </div>
+            </Box>
+        </Container>
     );
 };
 

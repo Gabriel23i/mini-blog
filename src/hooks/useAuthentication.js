@@ -1,4 +1,5 @@
-import { db } from '../firebase/config';
+import { useState, useEffect } from 'react';
+
 import {
     getAuth,
     createUserWithEmailAndPassword,
@@ -6,9 +7,9 @@ import {
     updateProfile,
     signOut
 } from 'firebase/auth';
-import React, { useState, useEffect } from 'react';
 
 export const useAuthentication = ()=> {
+
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(null);
 
@@ -24,6 +25,7 @@ export const useAuthentication = ()=> {
             return;
         };
     };
+
     // register
     const createUser = async (data)=> {
 
@@ -99,7 +101,7 @@ export const useAuthentication = ()=> {
     useEffect(()=>{
         return ()=> setCancelled(true);
     },[]);
-    
+
     return {
         auth,
         createUser,

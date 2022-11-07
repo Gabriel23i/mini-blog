@@ -1,35 +1,42 @@
+import { Chip, Stack, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
 import { useFetchDocument } from '../../hooks/useFetchDocument';
 import ScrollToTopOnMount from '../../utils/ScrollToTopOnMount';
 
-import styles from './Post.module.css';
+import { Container, Content, Tags } from './styles';
 
 const Post = () => {
     const { id } = useParams();
     const { document: post, loading } = useFetchDocument('posts', id);
 
     return (
-        <div className={styles.post_container}>
+        <Container>
             <ScrollToTopOnMount />
-            {loading && <p>Carregando post...</p>}
+            {loading && <Typography paragraph>Carregando post...</Typography>}
             {post && (
                 <>
-                    <h1>{post.title}</h1>
-                    <img src={post.image} alt={post.title} />
-                    <p>{post.body}</p>
-                    <h3>Este post trata sobre:</h3>
-                    <div className={styles.tags}>
-                        {post.tagsArray.map((tag)=> (
-                            <p key={tag}>
-                                <span>#</span>
-                                {tag}
-                            </p>
-                        ))}
-                    </div>
+                    <Typography variant='h4'>{post.title}</Typography>
+                    <Content>
+                        <img src={post.image} alt={post.title} />
+                        <Typography paragraph>{post.body}</Typography>
+                        <Tags>
+                            {post.tagsArray.map((tag)=> (
+                                <Stack key={tag} spacing={1} marginRight='4px' alignItems="center">
+                                    <Stack direction="row" spacing={1}>
+                                        <Chip
+                                            label={`#${tag}`}
+                                            variant="outlined"
+                                            sx={{ color:'#4779EE', borderColor:'#4779EE' }}
+                                        />
+                                    </Stack>
+                                </Stack>
+                            ))}
+                        </Tags>
+                    </Content>
                 </>
             )}
-        </div>
+        </Container>
     );
 };
 

@@ -1,104 +1,179 @@
 import React, { useState, useEffect } from 'react';
 import { useAuthentication } from '../../hooks/useAuthentication';
+
 import ScrollToTopOnMount from '../../utils/ScrollToTopOnMount';
 
-import styles from './Register.module.css';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { LoadingButton } from '@mui/lab';
+import {
+    Box,
+    FilledInput,
+    FormControl,
+    IconButton,
+    InputAdornment,
+    InputLabel,
+    TextField,
+    Typography
+} from '@mui/material';
+
+import { Container } from './styles';
+import ErrorFeedback from '../../components/ErrorFeedback/ErrorFeedback';
 
 const Register = () => {
 
-  const [displayName, setDisplayName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
+    const [displayName, setDisplayName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [ showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 
-  const { createUser, error: authError, loading } = useAuthentication();
+    const { createUser, error: authError, loading } = useAuthentication();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    setError('');
+        setError('');
 
-    const user = {
-      displayName,
-      email,
-      password
+        const user = {
+            displayName,
+            email,
+            password
+        };
+
+        if(password !== confirmPassword){
+            setError('As senhas precisam ser iguais!');
+            return;
+        };
+
+        await createUser(user);
     };
 
-    if(password !== confirmPassword){
-      setError('As senhas precisam ser iguais!');
-      return;
-    };
-
-    const res = await createUser(user);
-
-  };
-
-  useEffect(()=>{
-    if(authError){
-      setError(authError);
-    };
-  },[authError]);
+    useEffect(()=>{
+        if(authError){
+            setError(authError);
+        };
+    },[authError]);
   
     return (
-        <div className={styles.register}>
+        <Container>
             <ScrollToTopOnMount />
-            <h1>Cadastre-se para postar</h1>
-            <p>Crie seu usuário e compartilhe suas histórias</p>
+            <Typography variant='h4'>Cadastre-se</Typography>
+            <Typography paragraph>Crie seu usuário e compartilhe suas histórias</Typography>
             <form onSubmit={handleSubmit}>
                 <label>
-                    <span>Nome:</span>
-                    <input
-                        type='text'
-                        name='displayname'
-                        placeholder='Nome do usuário'
-                        value={displayName}
-                        onChange={(e)=> setDisplayName(e.target.value)}
-                        required
-                    />
+                    <Box
+                        sx={{
+                            width: 500,
+                            maxWidth: '100%',
+                        }}
+                    >
+                        <TextField
+                            type='text'
+                            name='displayname'
+                            value={displayName}
+                            onChange={(e)=> setDisplayName(e.target.value)}
+                            label="Nome"
+                            variant="filled"
+                            fullWidth
+                            required
+                        />
+                    </Box>
                 </label>
                 <label>
-                    <span>E-mail:</span>
-                    <input
-                        type='email'
-                        name='email'
-                        placeholder='E-mail do usuário'
-                        value={email}
-                        onChange={(e)=> setEmail(e.target.value)}
-                        required
-                    />
+                    <Box
+                        sx={{
+                            width: 500,
+                            maxWidth: '100%',
+                        }}
+                    >
+                        <TextField
+                            type='email'
+                            name='email'
+                            value={email}
+                            onChange={(e)=> setEmail(e.target.value)}
+                            label="E-mail"
+                            variant="filled"
+                            fullWidth
+                            required
+                        />
+                    </Box>
                 </label>
                 <label>
-                    <span>Senha:</span>
-                    <input
-                        type='password'
-                        name='password'
-                        placeholder='Insira sua senha'
-                        value={password}
-                        onChange={(e)=>setPassword(e.target.value)}
-                        required
-                    />
+                    <FormControl
+                        sx={{
+                            width: 500,
+                            maxWidth: '100%',
+                        }}
+                        variant="filled"
+                    >
+                        <InputLabel>Senha *</InputLabel>
+                        <FilledInput
+                            name='password'
+                            value={password}
+                            onChange={(e)=>setPassword(e.target.value)}
+                            type={showPassword ? 'text' : 'password'}
+                            fullWidth
+                            required
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        onClick={()=> setShowPassword(!showPassword)}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                        />
+                    </FormControl>
                 </label>
                 <label>
-                    <span>Confirmação de senha:</span>
-                    <input
-                        type='password'
-                        name='confirmPassword'
-                        placeholder='Confirme a sua senha'
-                        value={confirmPassword}
-                        onChange={(e)=> setConfirmPassword(e.target.value)}
-                        required
-                    />
+                    <FormControl
+                        sx={{
+                            width: 500,
+                            maxWidth: '100%',
+                        }}
+                        variant="filled"
+                    >
+                        <InputLabel>Confirmação de senha *</InputLabel>
+                        <FilledInput
+                            name='confirmPassword'
+                            type={showPasswordConfirm ? 'text' : 'password'}
+                            value={confirmPassword}
+                            onChange={(e)=> setConfirmPassword(e.target.value)}
+                            fullWidth
+                            required
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        onClick={()=> setShowPasswordConfirm(!showPasswordConfirm)}
+                                        edge="end"
+                                    >
+                                        {showPasswordConfirm ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                        />
+                    </FormControl>
                 </label>
-                {!loading && (<button className='btn'>Cadastrar</button>)}
-                {loading && (
-                <button className='btn' disabled>
-                    Aguarde...
-                </button>
-                )}
-                {error && (<p className='error'>{error}</p>)}
+                <Box sx={{ '& > button': { m: 1 } }}>
+                    <LoadingButton
+                        type='submit'
+                        size='medium'
+                        color='success'
+                        variant='contained'
+                        loading={loading}
+                        loadingIndicator="Aguarde..."
+                        disabled={loading ? true : false}
+                    >
+                        Cadastrar
+                    </LoadingButton>
+                </Box>
+                {error && <ErrorFeedback propError={error} />}
             </form>
-        </div>
+        </Container>
     );
 };
 

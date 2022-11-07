@@ -2,65 +2,92 @@ import { Link } from 'react-router-dom';
 
 import { useAuthValue } from '../../context/AuthContext';
 import { useFetchDocuments } from '../../hooks/useFetchDocuments';
-import { useDeleteDocument } from '../../hooks/useDeleteDocument';
 
-import styles from './Dashboard.module.css';
 import ScrollToTopOnMount from '../../utils/ScrollToTopOnMount';
 
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import { Box, Typography } from '@mui/material';
+import { DialogDelete } from '../../components/DialogDelete/DialogDelete';
+
+import PostAddIcon from '@mui/icons-material/PostAdd';
+
+import { Container, NoPosts, PostHeader } from './styles';
+import Loading from '../../components/Loading/Loading';
+
 const Dashboard = () => {
+
     const { user } = useAuthValue();
     const uid = user.uid;
 
     const { documents: posts, loading } = useFetchDocuments('posts', null, uid);
 
-    const { deleteDocument } = useDeleteDocument('posts');
-
-    if(loading){
-        return <p>Carregando...</p>
-    }
-
     return (
-        <div className={styles.dashboard}>
+        <Container>
+            {loading && <Loading />}
             <ScrollToTopOnMount />
-            <h2>Dashboard</h2>
-            <p>Gerencie os seus posts</p>
-            {posts && posts.length === 0 ? (
-                <div className={styles.nopost}>
-                    <p>Não foram encontrados posts</p>
-                    <Link to='/posts/create' className='btn'>Criar primeiro post</Link>
-                </div>
-            ) : (
-                <>
-                    <div className={styles.post_header}>
-                        <span>Título</span>
-                        <span>Ações</span>
-                    </div>
-
-                    {posts && 
-                        posts.map((post)=> (
-                            <div key={post.id} className={styles.post_row}>
-                                <p>{post.title}</p>
-                                <div>
-                                    <Link to={`/posts/${post.id}`} className='btn btn-outline'>
-                                        Ver
-                                    </Link>
-                                    <Link to={`/posts/edit/${post.id}`} className='btn btn-outline'>
-                                        Editar
-                                    </Link>
-                                    <button
-                                        onClick={()=> deleteDocument(post.id)}
-                                        className='btn btn-outline btn-danger'
-                                    >
-                                        Excluir
-                                    </button>
-                                </div>
-                            </div>
-                        )
-                    )}
-                </>
-            )}
-       
-        </div>
+            <Typography variant='h4'>
+                Gerencie seus posts
+            </Typography>
+            {!posts || posts.length === 0 ?
+                (
+                    <NoPosts>
+                        <Typography>
+                            Não foram encontrados posts
+                        </Typography>
+                        <Link to='/posts/create'>
+                            <Stack direction="row" spacing={2}>
+                                <Button
+                                    startIcon={<PostAddIcon />}
+                                    size='medium'
+                                    color='primary'
+                                >
+                                    Criar primeiro post
+                                </Button>
+                            </Stack>
+                        </Link>
+                    </NoPosts>
+                )
+                :(
+                    <>
+                        <PostHeader>
+                            <span>Títulos</span>
+                            <span>Ações</span>
+                        </PostHeader>
+                        {posts && posts.map((post)=> (
+                            <PostHeader key={post.id}>
+                                <Typography>{post.title}</Typography>
+                                <Box>
+                                    <Stack direction="row" spacing={2}>
+                                        <Link to={`/posts/${post.id}`}>
+                                            <Button
+                                                startIcon={<RemoveRedEyeOutlinedIcon />}
+                                                size='medium'
+                                                variant='contained'
+                                            >
+                                                Visualizar
+                                            </Button>
+                                        </Link>
+                                        <Link to={`/posts/edit/${post.id}`}>
+                                            <Button
+                                                startIcon={<EditOutlinedIcon />}
+                                                size='medium'
+                                                variant='contained'
+                                            >
+                                                Editar
+                                            </Button>
+                                        </Link>
+                                        <DialogDelete post={post} />
+                                    </Stack>
+                                </Box>
+                            </PostHeader>
+                        ))}
+                    </>
+                )
+            }
+        </Container>
     );
 };
 

@@ -64,7 +64,7 @@ export const useFetchDocuments = (docCollection, search = null, uid = null)=> {
                 setLoading(false);
 
             } catch (error) {
-                console.log(error);
+                console.error(error);
                 setError(error.message);
                 setLoading(false);
             };

@@ -3,14 +3,30 @@ import { useAuthentication } from '../../hooks/useAuthentication';
 
 import ScrollToTopOnMount from '../../utils/ScrollToTopOnMount';
 
-import styles from './Login.module.css';
+import ErrorFeedback from '../../components/ErrorFeedback/ErrorFeedback';
+import RedirectRecoverPassword from '../../components/RedirectRecoverPassword/RedirectRecoverPassword';
+
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { LoadingButton } from '@mui/lab';
+import { Box } from '@mui/system';
+import {
+    FilledInput,
+    FormControl,
+    IconButton,
+    InputAdornment,
+    InputLabel,
+    TextField,
+    Typography
+} from '@mui/material';
+
+import { Container } from './styles';
 
 const Login = () => {
-
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     const { login, error: authError, loading } = useAuthentication();
 
@@ -20,58 +36,96 @@ const Login = () => {
         setError('');
 
         const user = {
-        email,
-        password
+            email,
+            password
         };
 
-        const res = await login(user);
+        await login(user);
+    };
 
-        console.log(res);
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword)
     };
 
     useEffect(()=>{
         if(authError){
-        setError(authError);
+            setError(authError);
         };
     },[authError]);
   
     return (
-        <div className={styles.login}>
+        <Container>
             <ScrollToTopOnMount />
-            <h1>Entrar</h1>
-            <p>Faça o login para poder utilizar o sistema</p>
+            <Typography variant='h4'>Entrar</Typography>
+            <Typography paragraph>Faça o login para poder utilizar o sistema</Typography>
             <form onSubmit={handleSubmit}>
                 <label>
-                    <span>E-mail:</span>
-                    <input
-                        type='email'
-                        name='email'
-                        placeholder='E-mail do usuário'
-                        value={email}
-                        onChange={(e)=> setEmail(e.target.value)}
-                        required
-                    />
+                    <Box
+                        sx={{
+                            width: 500,
+                            maxWidth: '100%',
+                        }}
+                    >
+                        <TextField
+                            name='email'
+                            type='email'
+                            value={email}
+                            onChange={(e)=> setEmail(e.target.value)}
+                            id="filled-basic"
+                            label="E-mail"
+                            variant="filled"
+                            fullWidth
+                            required
+                        />
+                        
+                    </Box>
                 </label>
                 <label>
-                    <span>Senha:</span>
-                    <input
-                        type='password'
-                        name='password'
-                        placeholder='Insira sua senha'
-                        value={password}
-                        onChange={(e)=>setPassword(e.target.value)}
-                        required
-                    />
+                    <FormControl
+                        sx={{
+                            width: 500,
+                            maxWidth: '100%',
+                        }}
+                        variant="filled"
+                    >
+                        <InputLabel>Senha *</InputLabel>
+                        <FilledInput
+                            name='password'
+                            type={showPassword ? 'text' : 'password'}
+                            value={password}
+                            onChange={(e)=>setPassword(e.target.value)}
+                            fullWidth
+                            required
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        onClick={handleClickShowPassword}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                        />
+                    </FormControl>
+                    <RedirectRecoverPassword />
                 </label>
-                {!loading && (<button className='btn'>Entrar</button>)}
-                {loading && (
-                <button className='btn' disabled>
-                    Aguarde...
-                </button>
-                )}
-                {error && (<p className='error'>{error}</p>)}
+                <Box sx={{ '& > button': { m: 1 } }}>
+                    <LoadingButton
+                        type='submit'
+                        size='medium'
+                        color='success'
+                        variant='contained'
+                        loading={loading}
+                        loadingIndicator="Aguarde..."
+                        disabled={loading ? true : false}
+                    >
+                        Entrar
+                    </LoadingButton>
+                </Box>
+                {error && <ErrorFeedback propError={error} />}
             </form>
-        </div>
+        </Container>
     );
 };
 

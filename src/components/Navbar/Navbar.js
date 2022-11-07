@@ -1,85 +1,61 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
-import { useAuthentication } from '../../hooks/useAuthentication';
 import { useAuthValue } from '../../context/AuthContext';
 
-import styles from './Navbar.module.css';
+import AccountMenu from '../AccountMenu/AccountMenu';
+import { Box } from '@mui/system';
+
+import { Nav, Logo } from './styles';
 
 const Navbar = () => {
     const { user } = useAuthValue();
-    const { logout } = useAuthentication();
+
+    const navigate = useNavigate();
+
+    const handleNavigate = ()=> {
+        navigate('/');
+    };
 
     return (
-        <nav className={styles.navbar}>
-            <NavLink className={styles.brand} to='/'>
+        <Nav>
+            <Logo onClick={handleNavigate}>
                 Mini <span>Blog</span>
-            </NavLink>
-            <ul className={styles.links_list}>
-                <li>
-                    <NavLink 
-                        className={({ isActive }) => (isActive ? styles.active : '')}
-                        to='/'
-                        end
-                    >
-                        Home
-                    </NavLink>
-                </li>
+            </Logo>
+            <Box
+                sx={{
+                    marginRight:'50px'
+                }}
+            >
+                <NavLink to='/' end>
+                    Home
+                </NavLink>
                 {!user && (
                     <>
-                        <li>
-                            <NavLink
-                                className={({ isActive }) => (isActive ? styles.active : '')}
-                                to='/login'
-                            >
-                                Entrar
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                className={({ isActive }) => (isActive ? styles.active : '')}
-                                to='/register'
-                            >
-                                Cadastrar
-                            </NavLink>
-                        </li>
+                        <NavLink to='/login'>
+                            Entrar
+                        </NavLink>
+                        <NavLink to='/register'>
+                            Cadastrar
+                        </NavLink>
                     </>
                 )}
                 {user && (
                     <>
-                        <li>
-                            <NavLink
-                                className={({ isActive }) => (isActive ? styles.active : '')}
-                                to='/posts/create'
-                            >
-                                Novo post
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                className={({ isActive }) => (isActive ? styles.active : '')}
-                                to='/dashboard'
-                            >
-                                Dashboard
-                            </NavLink>
-                        </li>
+                        <NavLink to='/posts/create'>
+                            Novo post
+                        </NavLink>
+                        <NavLink to='/dashboard'>
+                            Dashboard
+                        </NavLink>
                     </>
                 )}
-                <li>
-                    <NavLink
-                        className={({ isActive }) => (isActive ? styles.active : '')}
-                        to='/about'
-                    >
-                        Sobre
-                    </NavLink>
-                </li>
-                {user && (
-                    <li>
-                        <button onClick={logout}>Sair</button>
-                    </li>
-                )}
-            </ul>
-        </nav>
+                <NavLink to='/about'>
+                    Sobre
+                </NavLink>
+            </Box>
+            <AccountMenu />
+        </Nav>
     );
 };
 

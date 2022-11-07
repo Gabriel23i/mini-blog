@@ -1,10 +1,13 @@
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 
-import { useState, useEffect } from 'react';
-import { useAuthentication } from './hooks/useAuthentication';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
+import { useAuthentication } from './hooks/useAuthentication';
 import { AuthProvider } from './context/AuthContext';
+import { UserImageProfileProvider } from './context/UserImageProfileContext';
 
 import Home from './pages/Home/Home';
 import About from './pages/About/About';
@@ -17,63 +20,70 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import Search from './pages/Search/Search';
 import Post from './pages/Post/Post';
 import EditPost from './pages/EditPost/EditPost';
+import RecoverPassword from './pages/RecoverPassword/RecoverPassword';
 
-import './App.css';
+import { Box } from '@mui/material';
+import Loading from './components/Loading/Loading';
 
 function App() {
 
-  const [user, setUser] = useState(undefined);
-  const { auth } = useAuthentication();
+    const [user, setUser] = useState(undefined);
 
-  const loadingUser = user === undefined;
+    const { auth } = useAuthentication();
 
-  useEffect(()=>{
-    onAuthStateChanged(auth, (user)=>{
-      setUser(user);
-    });
-  },[auth]);
+    const loadingUser = user === undefined;
 
-  if(loadingUser){
-    return(<p>Carregando...</p>);
-  };
+    useEffect(()=>{
+        onAuthStateChanged(auth, (user)=>{
+            setUser(user);
+        });
+    },[auth]);
+
+    if(loadingUser){
+        return(<Loading />);
+    };
 
     return (
-        <div className='App'>
+        <Box className='App'>
             <AuthProvider value={{ user }}>
-                <BrowserRouter>
-                    <Navbar />
-                    <div className='container'>
-                        <Routes>
-                        <Route path='/' element={<Home />} />
-                        <Route path='/about' element={<About />} />
-                        <Route path='/search' element={<Search />} />
-                        <Route path='/posts/:id' element={<Post />} />
-                        <Route
-                            path='/login'
-                            element={!user ? <Login /> : <Navigate to="/" />}
-                        />
-                        <Route
-                            path='/register'
-                            element={!user ? <Register /> : <Navigate to="/" />}
-                        />
-                        <Route
-                            path='/posts/edit/:id'
-                            element={user ? <EditPost /> : <Navigate to='/login' />}
-                        />
-                        <Route
-                            path='/posts/create'
-                            element={user ? <CreatePost /> : <Navigate to='/login' />}
-                        />
-                        <Route
-                            path='/dashboard'
-                            element={user ? <Dashboard /> : <Navigate to='/login' />}
-                        />
-                        </Routes>
-                    </div>
-                    <Footer />
-                </BrowserRouter>
+                <UserImageProfileProvider>
+                    <BrowserRouter>
+                        <Navbar />
+                        <Box className='container'>
+                            <Routes>
+                            <Route path='/' element={<Home />} />
+                            <Route path='/about' element={<About />} />
+                            <Route path='/search' element={<Search />} />
+                            <Route path='/posts/:id' element={<Post />} />
+                            <Route path='/recoverpassword' element={<RecoverPassword />} />
+                            <Route
+                                path='/login'
+                                element={!user ? <Login /> : <Navigate to="/" />}
+                            />
+                            <Route
+                                path='/register'
+                                element={!user ? <Register /> : <Navigate to="/" />}
+                            />
+                            <Route
+                                path='/posts/edit/:id'
+                                element={user ? <EditPost /> : <Navigate to='/login' />}
+                            />
+                            <Route
+                                path='/posts/create'
+                                element={user ? <CreatePost /> : <Navigate to='/login' />}
+                            />
+                            <Route
+                                path='/dashboard'
+                                element={user ? <Dashboard /> : <Navigate to='/login' />}
+                            />
+                            </Routes>
+                        </Box>
+                        <Footer />
+                    </BrowserRouter>
+                </UserImageProfileProvider>
             </AuthProvider>
-        </div>
+            <ToastContainer />
+        </Box>
     );
 };
 

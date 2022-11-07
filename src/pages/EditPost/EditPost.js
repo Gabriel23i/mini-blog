@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+
+import ScrollToTopOnMount from '../../utils/ScrollToTopOnMount';
+
 import { useAuthValue } from '../../context/AuthContext';
-import { useInsertDocument } from '../../hooks/useInsertDocument';
 import { useFetchDocument } from '../../hooks/useFetchDocument';
 import { useUpdateDocument } from '../../hooks/useUpdateDocument';
 
+import { Box, TextField, Typography } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 
-import styles from './EditPost.module.css';
-import ScrollToTopOnMount from '../../utils/ScrollToTopOnMount';
+import { Container } from './styles';
+import ErrorFeedback from '../../components/ErrorFeedback/ErrorFeedback';
 
 const EditPost = () => {
     
@@ -29,16 +33,16 @@ const EditPost = () => {
         setFormError('');
         
         try {
-        new URL(image);
+            new URL(image);
         } catch (error) {
-        setFormError('A imagem precisar ser uma URL.');
+            setFormError('A imagem precisar ser uma URL.');
         };
 
         // create array tags
         const tagsArray = tags.split(',').map((tag)=> tag.trim().toLowerCase());
 
         if(!title || !image || !tags || !body){
-        setFormError('Por favor, preencha todos os campos!');
+            setFormError('Por favor, preencha todos os campos!');
         };
 
         if(formError) return;
@@ -69,74 +73,89 @@ const EditPost = () => {
     },[post]);
 
     return (
-        <div className={styles.edit_post}>
+        <Container>
             <ScrollToTopOnMount />
             {post && (
                 <>
-                    <h2>Editando o post: {post.title}</h2>
-                    <p>Altere os dados do post como desejar</p>
-                    <form onSubmit={handleSubmit}>
-                    <label>
-                        <span>Título:</span>
-                        <input
-                            type='text'
-                            name='title'
-                            placeholder='Pense num bom título...'
-                            onChange={(e)=> setTitle(e.target.value)}
-                            value={title}
-                            required
+                    <Typography variant='h4'>
+                        Altere os dados do post como desejar
+                    </Typography>
+                    <form onSubmit={ handleSubmit }>
+                        <label>
+                            <TextField
+                                label="Título"
+                                variant="filled"
+                                type='text'
+                                name='title'
+                                placeholder='Pense num bom título...'
+                                onChange={(e)=> setTitle(e.target.value)}
+                                value={title}
+                                required
+                            />
+                        </label>
+                        <label>
+                            <TextField
+                                label="URL da imagem"
+                                variant="filled"
+                                type='text'
+                                name='image'
+                                placeholder='Insira uma imagem que representa o seu post'
+                                onChange={(e)=> setImage(e.target.value)}
+                                value={image}
+                                required
+                            />
+                        </label>
+                        <Typography paragraph>
+                            Preview da imagem atual
+                        </Typography>
+                        <img
+                            src={post.image}
+                            alt={post.title}
                         />
-                    </label>
-                    <label>
-                        <span>URL da imagem:</span>
-                        <input
-                            type='text'
-                            name='image'
-                            placeholder='Insira uma imagem que representa o seu post'
-                            onChange={(e)=> setImage(e.target.value)}
-                            value={image}
-                            required
-                        />
-                    </label>
-                    <p className={styles.preview_title}>Preview da imagem atual:</p>
-                    <img
-                        className={styles.image_preview}
-                        src={post.image}
-                        alt={post.title}
-                    />
-                    <label>
-                        <span>Conteúdo:</span>
-                        <textarea
-                            name='body'
-                            placeholder='Insira o conteúdo do post'
-                            onChange={(e)=> setBody(e.target.value)}
-                            value={body}
-                            required
-                        ></textarea>
-                    </label>
-                    <label>
-                        <span>Tags:</span>
-                        <input
-                            type='text'
-                            name='tags'
-                            placeholder='Insira as tags separadas por vírgulas'
-                            onChange={(e)=> setTags(e.target.value)}
-                            value={tags}
-                            required
-                        />
-                    </label>
-                    {!response.loading && <button className='btn'>Editar</button>}
-                    {response.loading && (
-                        <button className='btn' disabled>
-                            Aguarde...
-                        </button>
-                    )}
-                    {response.error && <p className='error'>{response.error}</p>}
-                    {formError && <p className='error'>{formError}</p>}
+                        <label>
+                            <TextField
+                                label='Conteúdo'
+                                multiline
+                                maxRows={8}
+                                variant='filled'
+                                name='body'
+                                placeholder='Insira o conteúdo do post'
+                                onChange={(e)=> setBody(e.target.value)}
+                                value={body}
+                                required
+                            />
+                        </label>
+                        <label>
+                            <TextField
+                                label="Tags"
+                                variant="filled"
+                                type='text'
+                                name='tags'
+                                placeholder='Insira as tags separadas por vírgulas'
+                                onChange={(e)=> setTags(e.target.value)}
+                                value={tags}
+                                required
+                            />
+                        </label>
+                        <Box>
+                            <LoadingButton
+                                type='submit'
+                                color='success'
+                                loading={response.loading}
+                                loadingIndicator="Aguarde..."
+                                variant="contained"
+                                disabled={response.loading ? true : false}
+                                fullWidth
+                            >
+                                Editar
+                            </LoadingButton>
+                        </Box>
+                        {response.error && <ErrorFeedback propError={response.error} />}
+                        {formError && <ErrorFeedback propError={formError} />}
                     </form>
                 </>
             )}
-        </div>
+        </Container>
     );
 };
 
