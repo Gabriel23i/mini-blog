@@ -14,9 +14,12 @@ import { Container, ContentButtons } from './styles';
 export function DialogLogout() {
     const [open, setOpen] = useState(false);
 
-    
     const { logout } = useAuthentication();
     const { setAnchorEl } = useImageProfileContext();
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
 
     const handleClose = () => {
         setOpen(false);
@@ -33,7 +36,7 @@ export function DialogLogout() {
             <Button
                 startIcon={<Logout />}
                 variant="text"
-                onClick={()=> setOpen(true)}
+                onClick={ handleOpen }
             >
                 Sair
             </Button>
@@ -44,7 +47,7 @@ export function DialogLogout() {
                     </Typography>
                 </Container>
                 <ContentButtons>
-                    <Button variant='text' onClick={ handleClose }>
+                    <Button variant="outlined" onClick={ handleClose }>
                         Fechar
                     </Button>
                     <Button

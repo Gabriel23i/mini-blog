@@ -33,7 +33,7 @@ export default function AccountMenu() {
                 }}
             >
                 <IconButton
-                    onClick={handleClick}
+                    onClick={ handleClick }
                     size="small"
                     sx={{ ml: 2 }}
                 >
@@ -44,7 +44,10 @@ export default function AccountMenu() {
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}
-                sx={{ marginTop:'24px', marginLeft:'-20px' }}
+                sx={{
+                    marginTop:'1.5rem',
+                    marginLeft:'-1rem'
+                }}
             >
                 <MenuItem>
                     <FormDialog />
@@ -55,7 +58,4 @@ export default function AccountMenu() {
             </Menu>
         </>
     );
-}
-
-
-
+};

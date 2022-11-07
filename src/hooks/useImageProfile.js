@@ -1,23 +1,12 @@
-import { collection, addDoc, getDocs } from "firebase/firestore";
-import { db } from "../firebase/config";
-import { deleteImage } from "./useDeleteImageProfile";
+import { updateProfile } from "firebase/auth";
 
-export const handleCreateImageProfile = async(url)=> {
-    
+export const handleCreateImageProfile = async(url, user)=> {
+
     try {
-        const querySnapshot = await getDocs(collection(db, "imageProfile"));
-
-        querySnapshot.forEach(image => {
-            deleteImage(image.id);
+        await updateProfile(user, {
+            photoURL:url
         });
-
-        await addDoc(collection(db, "imageProfile"), {
-            url
-        });
-        
-        await getDocs(collection(db, "imageProfile"));
-
     } catch (e) {
-        console.error("Error adding document: ", e);
+        console.error(e);
     };
 };
