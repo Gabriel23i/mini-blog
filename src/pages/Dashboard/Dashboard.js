@@ -20,7 +20,7 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 
-import { Container, NoPosts, PostHeader } from './styles';
+import { Container, NoPosts, ActionsPosts, PostHeader } from './styles';
 
 const Dashboard = () => {
 
@@ -57,10 +57,10 @@ const Dashboard = () => {
                 )
                 :(
                     <>
-                        <PostHeader>
+                        <ActionsPosts>
                             <span>Títulos</span>
                             <span>Ações</span>
-                        </PostHeader>
+                        </ActionsPosts>
                         {posts && posts.map((post)=> (
                             <PostHeader key={post.id}>
                                 <Typography>{post.title}</Typography>

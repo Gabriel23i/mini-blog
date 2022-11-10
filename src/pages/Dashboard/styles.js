@@ -27,13 +27,22 @@ export const NoPosts = styled.div `
     };
 `;
 
-export const PostHeader = styled.div `
+export const ActionsPosts = styled.div`
     display: flex;
     justify-content: space-between;
     width: 80%;
     padding: 0.625rem;
     font-weight: bold;
     border-bottom: 0.125rem solid #CCC;
+    margin-bottom: 2rem;
+    font-size:1.4rem
+`;
+export const PostHeader = styled.div `
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    padding: 0.625rem;
+    border-bottom: 0.025rem solid #CCC;
 `;
 
 export const PostRow = styled.div `
