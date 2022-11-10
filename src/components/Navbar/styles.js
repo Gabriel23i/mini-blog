@@ -35,7 +35,7 @@ export const Nav = styled.nav`
         height: 0.18rem;
         width: 0;
         left: 0;
-        bottom: -0.62;
+        bottom: -0.62rem;
         transition: 0.3s;
     };
 
