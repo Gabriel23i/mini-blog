@@ -1,17 +1,24 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import ScrollToTopOnMount from '../../utils/ScrollToTopOnMount';
+import ErrorFeedback from '../../components/ErrorFeedback/ErrorFeedback';
 
 import { useAuthValue } from '../../context/AuthContext';
+
 import { useFetchDocument } from '../../hooks/useFetchDocument';
 import { useUpdateDocument } from '../../hooks/useUpdateDocument';
 
-import { Box, TextField, Typography } from '@mui/material';
+import ScrollToTopOnMount from '../../utils/ScrollToTopOnMount';
+
+import {
+    Box,
+    Typography,
+    TextField
+} from '@mui/material';
+
 import { LoadingButton } from '@mui/lab';
 
 import { Container } from './styles';
-import ErrorFeedback from '../../components/ErrorFeedback/ErrorFeedback';
 
 const EditPost = () => {
     

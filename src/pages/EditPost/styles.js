@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div `
     text-align: center;
-    margin-top: 100px;
+    margin-top: 6.25rem;
 
     h4 {
         margin-bottom: 2rem;
@@ -12,6 +12,11 @@ export const Container = styled.div `
         margin: 1.8rem 0 0.5rem 0;
         color: #000;
         font-weight: 500;
+    };
+
+    form {
+        max-width: 40%;
+        margin: 0 auto;
     };
 
     img {

@@ -2,10 +2,13 @@ import { useState } from 'react';
 
 import { useDeleteDocument } from '../../hooks/useDeleteDocument';
 
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
+import {
+    Button,
+    Dialog,
+    Typography
+} from '@mui/material';
+
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
-import { Typography } from '@mui/material';
 
 import { Container, ContentButtons } from './styles';
 

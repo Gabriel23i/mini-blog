@@ -1,21 +1,26 @@
 import { Link } from 'react-router-dom';
 
+import Loading from '../../components/Loading/Loading';
+import { DialogDelete } from '../../components/DialogDelete/DialogDelete';
+
 import { useAuthValue } from '../../context/AuthContext';
+
 import { useFetchDocuments } from '../../hooks/useFetchDocuments';
 
 import ScrollToTopOnMount from '../../utils/ScrollToTopOnMount';
 
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
-import { Box, Typography } from '@mui/material';
-import { DialogDelete } from '../../components/DialogDelete/DialogDelete';
+import {
+    Box,
+    Typography,
+    Button,
+    Stack
+} from '@mui/material';
 
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import PostAddIcon from '@mui/icons-material/PostAdd';
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 
 import { Container, NoPosts, PostHeader } from './styles';
-import Loading from '../../components/Loading/Loading';
 
 const Dashboard = () => {
 

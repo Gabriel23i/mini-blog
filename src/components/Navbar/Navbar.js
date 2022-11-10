@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
+import AccountMenu from '../AccountMenu/AccountMenu';
+
 import { useAuthValue } from '../../context/AuthContext';
 
-import AccountMenu from '../AccountMenu/AccountMenu';
-import { Box } from '@mui/system';
+import { Box } from '@mui/material';
 
 import { Nav, Logo } from './styles';
 
@@ -24,7 +25,7 @@ const Navbar = () => {
             </Logo>
             <Box
                 sx={{
-                    marginRight:'50px'
+                    marginRight:'3.12rem'
                 }}
             >
                 <NavLink to='/' end>

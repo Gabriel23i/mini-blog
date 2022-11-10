@@ -5,11 +5,15 @@ export const Container = styled.div `
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 100px;
+    margin-top: 6.25rem;
 
     h4 {
         color: #1c1c1c;
         margin: 0.5em 0;
+    };
+
+    form {
+        background-color: #EDF3F6;
     };
 `;
 
@@ -25,6 +29,6 @@ export const NoPosts = styled.div `
     };
 
     a {
-        padding: 10px 25px;
+        padding: 0.625rem 1.563rem;
     };
 `;

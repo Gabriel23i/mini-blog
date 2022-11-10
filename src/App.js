@@ -5,6 +5,8 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
+import Loading from './components/Loading/Loading';
+
 import { useAuthentication } from './hooks/useAuthentication';
 import { AuthProvider } from './context/AuthContext';
 import { UserImageProfileProvider } from './context/UserImageProfileContext';
@@ -23,7 +25,6 @@ import EditPost from './pages/EditPost/EditPost';
 import RecoverPassword from './pages/RecoverPassword/RecoverPassword';
 
 import { Box } from '@mui/material';
-import Loading from './components/Loading/Loading';
 
 function App() {
 

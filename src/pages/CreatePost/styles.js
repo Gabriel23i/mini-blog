@@ -6,7 +6,7 @@ export const Container = styled.div `
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-top: 120px;
+    margin-top: 7.5rem;
 
     h4 {
         color: #1c1c1c;

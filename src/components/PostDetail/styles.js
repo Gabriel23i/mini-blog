@@ -6,16 +6,17 @@ export const Container = styled.div `
     img {
         position: relative;
         z-index: -1;
-        width: 600px;
-        max-width: 600px;
-        height: 400px;
-        max-height: 400px;
+        width: 37.5rem;
+        max-width: 37.5rem;
+        height: 25rem;
+        max-height: 25rem;
+        border: 0.063rem solid #DCDCDC;
+        border-radius: 0.25rem;
     };
 
     h5 {
         color: #1c1c1c;
         margin: 0.2em 0 0.4rem 0;
-        text-decoration:none;
     };
 
     h5:hover {
@@ -24,7 +25,7 @@ export const Container = styled.div `
 
     & .createdBy {
         font-style: italic;
-        color: 	#808080;
+        color: #808080;
         font-size: .8em;
         margin-bottom: 1em;
     };
@@ -36,10 +37,11 @@ export const Skin = styled.div `
     align-items: center;
     justify-content: center;
     position: relative;
-    max-width: 600px;
-    max-height: 400px;
+    max-width: 37.5rem;
+    max-height: 25rem;
     
     p {
+        text-transform: uppercase;
         visibility: hidden;
         position: absolute;
         color: #fff;

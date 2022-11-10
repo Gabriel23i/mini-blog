@@ -2,9 +2,11 @@ import { Link } from 'react-router-dom';
 
 import ScrollToTopOnMount from '../../utils/ScrollToTopOnMount';
 
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import {
+    Typography,
+    Stack,
+    Button,
+} from '@mui/material';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 
 import { Container } from './styles';

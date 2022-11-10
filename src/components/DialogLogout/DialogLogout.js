@@ -1,12 +1,16 @@
 import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
+
+import { useAuthValue } from '../../context/AuthContext';
 
 import { useAuthentication } from '../../hooks/useAuthentication';
 import { useImageProfileContext } from '../../hooks/useImageProfileContext';
 
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import { Typography } from '@mui/material';
-
+import {
+    Typography,
+    Dialog,
+    Button
+} from '@mui/material';
 import { Logout } from '@mui/icons-material';
 
 import { Container, ContentButtons } from './styles';
@@ -14,6 +18,7 @@ import { Container, ContentButtons } from './styles';
 export function DialogLogout() {
     const [open, setOpen] = useState(false);
 
+    const { user } = useAuthValue();
     const { logout } = useAuthentication();
     const { setAnchorEl } = useImageProfileContext();
 
@@ -26,10 +31,10 @@ export function DialogLogout() {
     };
 
     const handleLogout = () =>{
-        setOpen(false)
-        logout()
-        setAnchorEl(null)
-    }
+        setOpen(false);
+        logout();
+        setAnchorEl(null);
+    };
 
     return (
         <>
@@ -59,6 +64,9 @@ export function DialogLogout() {
                     </Button>
                 </ContentButtons>
             </Dialog>
+            {!user && (
+                <Navigate to="/login" replace={true} />
+            )}
         </>
     );
 };

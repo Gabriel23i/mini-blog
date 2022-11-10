@@ -1,19 +1,24 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
+
+import ErrorFeedback from '../../components/ErrorFeedback/ErrorFeedback';
 
 import { useAuthValue } from '../../context/AuthContext';
+
 import { useInsertDocument } from '../../hooks/useInsertDocument';
 
 import ScrollToTopOnMount from '../../utils/ScrollToTopOnMount';
 
+import {
+    Box,
+    TextField,
+    Typography
+} from '@mui/material';
+
 import LoadingButton from '@mui/lab/LoadingButton';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import { Typography } from '@mui/material';
 
 import { Container } from './styles';
-import ErrorFeedback from '../../components/ErrorFeedback/ErrorFeedback';
 
 const CreatePost = () => {
 

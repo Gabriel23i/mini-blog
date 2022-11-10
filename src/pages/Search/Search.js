@@ -1,12 +1,19 @@
 import { Link } from 'react-router-dom';
 
+import PostDetail from '../../components/PostDetail/PostDetail';
+
 import { useFetchDocuments } from '../../hooks/useFetchDocuments';
 import { useQuery } from '../../hooks/useQuery';
 
-import PostDetail from '../../components/PostDetail/PostDetail';
+import {
+    Box,
+    Button,
+    Stack,
+    Typography
+} from '@mui/material';
 
-import { Box, Button, Stack, Typography } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 import { Container, NoPosts } from './styles';
 
 const Search = () => {

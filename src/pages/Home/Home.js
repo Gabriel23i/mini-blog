@@ -1,23 +1,28 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
+import PostDetail from '../../components/PostDetail/PostDetail';
+import Loading from '../../components/Loading/Loading';
+
 import { useFetchDocuments } from '../../hooks/useFetchDocuments';
 
-import PostDetail from '../../components/PostDetail/PostDetail';
 import ScrollToTopOnMount from '../../utils/ScrollToTopOnMount';
 
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
-import Divider from '@mui/material/Divider';
-import Typography from '@mui/material/Typography';
-import { Box, Button, Stack } from '@mui/material';
+import {
+    Box,
+    IconButton,
+    Typography,
+    Paper,
+    Stack,
+    Button,
+    Divider,
+    InputBase
+} from '@mui/material';
 
 import SearchIcon from '@mui/icons-material/Search';
-import IconButton from '@mui/material/IconButton';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 
 import { Container, NoPosts } from './styles';
-import Loading from '../../components/Loading/Loading';
 
 const Home = () => {
     const [query, setQuery] = useState('');
@@ -44,21 +49,21 @@ const Home = () => {
                 component="form"
                 onSubmit={handleSubmit}
                 sx={{ 
-                    p: '2px 4px',
+                    p: '0.125rem 0.25rem',
                     display: 'flex',
                     alignItems: 'center',
                     width: 500,
                     maxWidth: '100%',
-                    marginBottom: '2em'
+                    marginBottom: '4em',
                 }}
             >
                 <InputBase
-                  sx={{ ml: 1, flex: 1 }}
-                  placeholder="Busque por #tags"
-                  onChange={(e)=> setQuery(e.target.value)}
+                    sx={{ ml: 1, flex: 1 }}
+                    placeholder="Busque por #tags"
+                    onChange={(e)=> setQuery(e.target.value)}
                 />
                 <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-                <IconButton type='submit' sx={{ p: '10px' }} aria-label="search">
+                <IconButton type='submit' sx={{ p: '0.625rem' }} aria-label="search">
                   <SearchIcon />
                 </IconButton>
             </Paper>

@@ -5,7 +5,7 @@ export const Container = styled.div `
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 120px;
+    margin-top: 7.5rem;
 
     h4 {
         color: #1c1c1c;
@@ -20,16 +20,18 @@ export const Content = styled.div `
     align-items: center;
 
     img {
-        width: 72%;
-        max-width: 100%;
+        width: 37.5rem;
+        max-width: 37.5rem;
+        border: 0.063rem solid #a0a0a0;
+        border-radius: 0.25rem;
     };
 
     p {
-        padding: 16px;
-        max-width: 800px;
-        text-align: start;
+        padding: 1rem;
+        max-width: 50rem;
+        text-align: justify;
         word-wrap: break-word;
-        font-size: 18px;
+        font-size: 1.125rem;
     };
 `;
 

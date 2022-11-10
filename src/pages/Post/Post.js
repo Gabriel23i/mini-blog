@@ -1,8 +1,13 @@
-import { Chip, Stack, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
 import { useFetchDocument } from '../../hooks/useFetchDocument';
 import ScrollToTopOnMount from '../../utils/ScrollToTopOnMount';
+
+import {
+    Chip,
+    Stack,
+    Typography
+} from '@mui/material';
 
 import { Container, Content, Tags } from './styles';
 
@@ -22,7 +27,7 @@ const Post = () => {
                         <Typography paragraph>{post.body}</Typography>
                         <Tags>
                             {post.tagsArray.map((tag)=> (
-                                <Stack key={tag} spacing={1} marginRight='4px' alignItems="center">
+                                <Stack key={tag} spacing={1} marginRight='0.25rem' alignItems="center">
                                     <Stack direction="row" spacing={1}>
                                         <Chip
                                             label={`#${tag}`}

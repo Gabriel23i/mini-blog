@@ -5,7 +5,7 @@ export const Container = styled.div `
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 6.25rem;
 
     h4 {
         color: #1c1c1c;
@@ -19,7 +19,7 @@ export const Container = styled.div `
 
     a {
         display: block;
-        margin-top: 15px;
-        padding: 10px 15px;
+        margin-top: 1rem;
+        padding: 0.625rem 1rem;
     };
 `;

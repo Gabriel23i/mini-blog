@@ -6,10 +6,10 @@ export const Container = styled.div `
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin-top: 100px;
+    margin-top: 6.25rem;
 
     p {
-        margin-top: 2px;
+        margin-top: 0.12rem;
         color: #aaa;
     };
 `;

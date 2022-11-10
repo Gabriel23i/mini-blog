@@ -7,9 +7,11 @@ export const AvatarProfile = () => {
     const { user } = useAuthValue();
 
     return (
-        <Avatar
-            src={ user?.photoURL}
-            sx={{ width: 42, height: 42 }}
-        />
+        user && (
+            <Avatar
+                src={ user?.photoURL}
+                sx={{ width: 42, height: 42 }}
+            />
+        )
     );
 };

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+
+import ErrorFeedback from '../../components/ErrorFeedback/ErrorFeedback';
+
 import { useAuthentication } from '../../hooks/useAuthentication';
 
 import ScrollToTopOnMount from '../../utils/ScrollToTopOnMount';
 
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { LoadingButton } from '@mui/lab';
 import {
     Box,
     FilledInput,
@@ -12,12 +13,14 @@ import {
     IconButton,
     InputAdornment,
     InputLabel,
-    TextField,
-    Typography
+    Typography,
+    TextField
 } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 import { Container } from './styles';
-import ErrorFeedback from '../../components/ErrorFeedback/ErrorFeedback';
 
 const Register = () => {
 

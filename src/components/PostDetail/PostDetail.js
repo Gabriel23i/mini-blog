@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-import { Typography } from '@mui/material';
+import {
+    Chip,
+    Stack,
+    Typography
+} from '@mui/material';
 
 import { Container, Skin, Tags } from './styles';
 
@@ -23,7 +25,7 @@ const PostDetail = ({ post }) => {
             </Typography>
             <Tags>
                 {post.tagsArray.map((tag)=> (
-                    <Stack key={tag} spacing={1} marginRight='4px' alignItems="center">
+                    <Stack key={tag} spacing={1} marginRight='0.25rem' alignItems="center">
                         <Stack direction="row" spacing={1}>
                             <Chip
                                 label={`#${tag}`}

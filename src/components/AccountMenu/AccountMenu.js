@@ -1,15 +1,19 @@
-import Box from '@mui/material/Box';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import IconButton from '@mui/material/IconButton';
-import { FormDialog } from '../DialogImageProfile/DialogImageProfile';
-import { useImageProfileContext } from '../../hooks/useImageProfileContext';
 import { AvatarProfile } from './AvatarProfile';
 import { DialogLogout } from '../DialogLogout/DialogLogout';
+import { FormDialog } from '../DialogImageProfile/DialogImageProfile';
+
+import { useImageProfileContext } from '../../hooks/useImageProfileContext';
+
+import {
+    Box,
+    Menu,
+    MenuItem,
+    IconButton
+} from '@mui/material';
 
 export default function AccountMenu() {
 
-    const { anchorEl, setAnchorEl} = useImageProfileContext();
+    const { anchorEl, setAnchorEl } = useImageProfileContext();
 
     const open = Boolean(anchorEl);
     
@@ -28,7 +32,7 @@ export default function AccountMenu() {
                     display: 'flex',
                     alignItems: 'center',
                     textAlign: 'center',
-                    marginRight:'50px',
+                    marginRight:'3.12rem',
                     position:'-webkit-sticky'
                 }}
             >

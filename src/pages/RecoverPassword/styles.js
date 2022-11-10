@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div `
-    padding: 22px;
-    border: 1px solid #a9a9a9;
+    padding: 1.37rem;
+    border: 0.063rem #a9a9a9;
     height: 20rem;
     border-radius: 0.50rem;
     text-align: center;
@@ -15,7 +15,7 @@ export const Container = styled.div `
     };
 
     p {
-        font-size: 18px;
+        font-size: 1.12rem;
         text-align: center;
         padding: 3rem 0 1.8rem 0;
         color: #2c2c2c;

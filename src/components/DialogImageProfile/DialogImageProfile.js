@@ -1,17 +1,22 @@
 import { useState } from 'react';
 
 import { useAuthValue } from '../../context/AuthContext';
+
 import { handleCreateImageProfile } from '../../hooks/useImageProfile';
 import { useImageProfileContext } from '../../hooks/useImageProfileContext';
 
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContentText from '@mui/material/DialogContentText';
+import {
+    Box,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContentText,
+    FormControl,
+    TextField
+} from '@mui/material';
+
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
-import { Box, FormControl } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 import { Content } from './styles';

@@ -6,7 +6,7 @@ export const Container = styled.div `
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 6.25rem;
 
     h4 {
         color: #1c1c1c;
@@ -31,18 +31,18 @@ export const PostHeader = styled.div `
     display: flex;
     justify-content: space-between;
     width: 80%;
-    padding: 10px;
+    padding: 0.625rem;
     font-weight: bold;
-    border-bottom: 2px solid #CCC;
+    border-bottom: 0.125rem solid #CCC;
 `;
 
 export const PostRow = styled.div `
     display: flex;
     justify-content: space-between;
     width: 80%;
-    padding: 10px;
+    padding: 0.625rem;
     align-items: center;
-    border-bottom: 1px solid #EEE;
+    border-bottom: 0.063rem solid #EEE;
 
     p {
         color: #1c1c1c;

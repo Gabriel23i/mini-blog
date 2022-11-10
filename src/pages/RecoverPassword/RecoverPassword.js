@@ -1,13 +1,17 @@
 import { useState } from 'react';
-import { sendPasswordResetEmail } from 'firebase/auth';
 import { toast } from 'react-toastify';
+import { sendPasswordResetEmail } from 'firebase/auth';
 
-import { useAuthentication } from '../../hooks/useAuthentication';
 import Loading from '../../components/Loading/Loading';
 
-import { Box } from '@mui/system';
+import { useAuthentication } from '../../hooks/useAuthentication';
+
+import {
+    Box,
+    Typography,
+    TextField
+} from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import { TextField, Typography } from '@mui/material';
 
 import { Container, ButtonStyle } from './styles';
 
